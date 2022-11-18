@@ -9,7 +9,7 @@ $pw = Read-Host -AsSecureString
 New-LocalUser -Name deployer -Password $pw -AccountNeverExpires -PasswordNeverExpires:$true
 Add-LocalGroupMember -Group Administrators -Member deployer
 Write-Host "Pull down unattend.xml and then sysprep the box"
-wget https://raw.githubusercontent.com/gmcyber/480share/master/unattend.xml -Outfile C:\Unattend.xml
+wget https://raw.githubusercontent.com/gmcyber/RangeControl/main/src/scripts/base-vms/windows/unattend.xml -Outfile C:\Unattend.xml
 C:\Windows\System32\Sysprep\sysprep.exe /oobe /generalize /unattend:C:\unattend.xml
 Write-Host "Set Power to High Performance"
 powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
