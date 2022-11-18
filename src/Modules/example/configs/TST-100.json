@@ -1,0 +1,22 @@
+{
+    "domain": "rangecontrol",
+    "ad_vsphere_group": "vsphere-users",
+    "vcenter_server": "vcenter.rangecontrol.local",
+    "top-folder": "COURSES/S23",
+    "course_name": "TST-100",
+    "course_networks_folder": "COURSE-NETWORKS",
+    "student_networks_folder": "STUDENT-NETWORKS",
+    "group_networks_folder": "GROUP-NETWORKS",
+    "student_role": "range-student",
+    "esxi_host": "esxi2.rangecontrol.local",
+    "data_store_name": "NFS-STUDENT",
+    "base_vms":"BASE-VMS",
+    "student_vms_folder":"STUDENT-VMS",
+    "course_vms_folder": "COURSE-VMS",
+    "group_vms_folder" : "GROUP-VMS",
+    "default_network":"TST-100-WAN",
+    "networks":["LAN","DMZ","MGMT","OPT"],
+    "instructors":["patrick.obrien"],
+    "instructor_role" : "range-instructor",
+    "snapshots": "1"
+}
