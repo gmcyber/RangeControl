@@ -1,0 +1,8 @@
+System.Anonymous
+System.View
+System.Read
+VirtualMachine.Interact.PowerOn
+VirtualMachine.Interact.PowerOff
+VirtualMachine.Interact.AnswerQuestion
+VirtualMachine.Interact.ConsoleInteract
+VirtualMachine.State.RevertToSnapshot
