@@ -1,8 +1,8 @@
 {
-    "domain": "range.local",
+    "domain": "range",
     "ad_vsphere_group": "vsphere-users",
     "vcenter_server": "vcenter.range.local",
-    "top-folder": "COURSES/S23",
+    "courses_folder": "COURSES-S23",
     "course_name": "OMJ-100-01",
     "course_networks_folder": "COURSE-NETWORKS",
     "student_networks_folder": "STUDENT-NETWORKS",

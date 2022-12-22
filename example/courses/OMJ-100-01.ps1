@@ -22,12 +22,12 @@ if($initialize_course -eq 'y')
     initializeCourse -configuration_file $configuration_file
 }
 
-$openrange = [OpenRange]::new($configuration_file,$roster)
+$rangecontrol = [RangeControl]::new($configuration_file,$roster)
 
 $initialize_nets = Read-Host "Do you want to initialize student/group networks (y/n)"
 if($initialize_nets -eq 'y')
 {
-    $openrange.InitializeUserNetworks()
+    $rangecontrol.InitializeUserNetworks()
 }
 
 <#
@@ -47,42 +47,42 @@ if($deploy_vms -eq 'y')
 {
 
     # WEEKS 1 - 6 (Weeks 1 - 3)
-    #$openrange.DeployClones("centos7.2002.base.rs2","web01")
-    #$openrange.DeployClones("centos7.2002.base.rs2","log01")
-    #$openrange.DeployClones("vyos.f22","fw-pleaswork")
-    #$openrange.DeployClones("vyos.f22","fw-mgmt")
-    #$openrange.DeployClones("xubuntu.f22","rw01")
-    #$openrange.DeployClones("xubuntu.f22","mgmt01")
-    #$openrange.DeployClones("windows.10.ltsc.f22","wks1")
-    #$openrange.DeployClones("server.2019.gui.f22.base","mgmt02-v2")
-    #$openrange.DeployClones("ubuntu.server.f22","jump")
+    #$rangecontrol.DeployClones("centos7.2002.base.rs2","web01")
+    #$rangecontrol.DeployClones("centos7.2002.base.rs2","log01")
+    #$rangecontrol.DeployClones("vyos.f22","fw-pleaswork")
+    #$rangecontrol.DeployClones("vyos.f22","fw-mgmt")
+    #$rangecontrol.DeployClones("xubuntu.f22","rw01")
+    #$rangecontrol.DeployClones("xubuntu.f22","mgmt01")
+    #$rangecontrol.DeployClones("windows.10.ltsc.f22","wks1")
+    #$rangecontrol.DeployClones("server.2019.gui.f22.base","mgmt02-v2")
+    #$rangecontrol.DeployClones("ubuntu.server.f22","jump")
 
 
     ## Assessment Practice
-    #$openrange.DeployClones("ubuntu.server.f22","practice")
-    #$openrange.DeployClones("vyos.f22.v2","fw-mgmt")
+    #$rangecontrol.DeployClones("ubuntu.server.f22","practice")
+    #$rangecontrol.DeployClones("vyos.f22.v2","fw-mgmt")
 
     ## Asessment Week 9
-    #$openrange.DeployClones("ubuntu.server.f22","nginx")
-    #$openrange.DeployClones("ubuntu.server.f22","dhcp")
-    #$openrange.DeployClones("windows.10.ltsc.f22","traveler")
-    #$openrange.DeployClones("vyos.f22.v2","edge01")
+    #$rangecontrol.DeployClones("ubuntu.server.f22","nginx")
+    #$rangecontrol.DeployClones("ubuntu.server.f22","dhcp")
+    #$rangecontrol.DeployClones("windows.10.ltsc.f22","traveler")
+    #$rangecontrol.DeployClones("vyos.f22.v2","edge01")
 
     #CA Week 10
-    #$openrange.DeployClones("rocky.f22","ca")
+    #$rangecontrol.DeployClones("rocky.f22","ca")
 
     #WEEKS 11-12 NIDS
-    #$openrange.DeployClones("ubuntu.server.f22","zeek")
+    #$rangecontrol.DeployClones("ubuntu.server.f22","zeek")
     #FINAL PROJECT
-    # $openrange.DeployClones("ubuntu.20.04.03.2022.base","ubuntu1")
-    # $openrange.DeployClones("ubuntu.20.04.03.2022.base","ubuntu2")
-    # $openrange.DeployClones("centos7.2022.base","centos1")
-    # $openrange.DeployClones("vyos.1.4.2022.base.v2","vyos1")
-    # $openrange.DeployClones("pf2.5.2.2022.base","pf1")
-    # $openrange.DeployClones("win10.ltsc.2022.base","wks1")
-    # $openrange.DeployClones("win10.ltsc.2022.base","wks2")
-    # $openrange.DeployClones("server.2019.gui.2022.base","srv1")
-    # $openrange.DeployClones("xubuntu.21.10.2022.base","xubuntu1")
+    # $rangecontrol.DeployClones("ubuntu.20.04.03.2022.base","ubuntu1")
+    # $rangecontrol.DeployClones("ubuntu.20.04.03.2022.base","ubuntu2")
+    # $rangecontrol.DeployClones("centos7.2022.base","centos1")
+    # $rangecontrol.DeployClones("vyos.1.4.2022.base.v2","vyos1")
+    # $rangecontrol.DeployClones("pf2.5.2.2022.base","pf1")
+    # $rangecontrol.DeployClones("win10.ltsc.2022.base","wks1")
+    # $rangecontrol.DeployClones("win10.ltsc.2022.base","wks2")
+    # $rangecontrol.DeployClones("server.2019.gui.2022.base","srv1")
+    # $rangecontrol.DeployClones("xubuntu.21.10.2022.base","xubuntu1")
 }
 
 $adhoc = Read-Host "Do you to run adhoc tasks (y/n)"
@@ -97,25 +97,25 @@ if($adhoc -eq 'y')
     #tweakVMPerformance -Name zeek-SEC350-0* -gb 2 -cpu 2
 
     #final project extra vms
-    #$openrange.DeployClones("server.2019.core.2022.base","srvcore1")
-    #$openrange.DeployClones("ubuntu.20.04.03.2022.base","ubuntu3")
-    #$openrange.DeployClones("ubuntu.20.04.03.2022.base","zeek")
-    #$openrange.DeployClones("centos7.2022.base","centos2")
-    #$openrange.DeployClones("win10.ltsc.2022.base","wks1.new")
-    #$openrange.DeployClones("win10.ltsc.2022.base","wks2.new")
-    #$openrange.DeployClones("xubuntu.21.10.2022.base","xubuntu1.new")
-    #$openrange.DeployClones("ubuntu.20.04.03.2022.base","ubuntu3")
-    #$openrange.DeployClones("ubuntu.server.2022","ubuntu-big")
+    #$rangecontrol.DeployClones("server.2019.core.2022.base","srvcore1")
+    #$rangecontrol.DeployClones("ubuntu.20.04.03.2022.base","ubuntu3")
+    #$rangecontrol.DeployClones("ubuntu.20.04.03.2022.base","zeek")
+    #$rangecontrol.DeployClones("centos7.2022.base","centos2")
+    #$rangecontrol.DeployClones("win10.ltsc.2022.base","wks1.new")
+    #$rangecontrol.DeployClones("win10.ltsc.2022.base","wks2.new")
+    #$rangecontrol.DeployClones("xubuntu.21.10.2022.base","xubuntu1.new")
+    #$rangecontrol.DeployClones("ubuntu.20.04.03.2022.base","ubuntu3")
+    #$rangecontrol.DeployClones("ubuntu.server.2022","ubuntu-big")
 
-    #$openrange.DeployClones("vyos.1.4.2022.base.v2","vyos2")
-    #$openrange.DeployClones("ubuntu.20.04.03.2022.base","ubuntu3")
+    #$rangecontrol.DeployClones("vyos.1.4.2022.base.v2","vyos2")
+    #$rangecontrol.DeployClones("ubuntu.20.04.03.2022.base","ubuntu3")
 
 
-    #$openrange.DeployClones("pf2.5.2.2022.base","pf2")
-    #$openrange.DeployClones("win10.ltsc.2022.base","wks3")
-    #$openrange.DeployClones("win10.ltsc.2022.base","wks4")
-    #$openrange.DeployClones("server.2019.gui.2022.base","srv2")
-   # $openrange.DeployClones("xubuntu.21.10.2022.base","xubuntu-another-jump")
+    #$rangecontrol.DeployClones("pf2.5.2.2022.base","pf2")
+    #$rangecontrol.DeployClones("win10.ltsc.2022.base","wks3")
+    #$rangecontrol.DeployClones("win10.ltsc.2022.base","wks4")
+    #$rangecontrol.DeployClones("server.2019.gui.2022.base","srv2")
+   # $rangecontrol.DeployClones("xubuntu.21.10.2022.base","xubuntu-another-jump")
     
 
 
@@ -136,11 +136,11 @@ if($spares -eq 'y')
     for($num=1; $num -le 3;$num++)
     {
 
-       #$openrange.DeployClone("win10.ltsc.base.f21","wks-$num-$section_selected",$instructors[$instructor_selected])
-       #$openrange.DeployClone("vyos.1.4.base.f21","vyos-$num-$section_selected",$instructors[$instructor_selected])
-       #$openrange.DeployClone("centos7.2009.base.f21","centos-$num-$section_selected",$instructors[$instructor_selected])
-       #$openrange.DeployClone("xubuntu.20.04.2.base.f21","xubuntu-$num-$section_selected",$instructors[$instructor_selected])
-       #$openrange.DeployClone("server2019.gui.f21","srv19-gui-$num-$section_selected",$instructors[$instructor_selected])
+       #$rangecontrol.DeployClone("win10.ltsc.base.f21","wks-$num-$section_selected",$instructors[$instructor_selected])
+       #$rangecontrol.DeployClone("vyos.1.4.base.f21","vyos-$num-$section_selected",$instructors[$instructor_selected])
+       #$rangecontrol.DeployClone("centos7.2009.base.f21","centos-$num-$section_selected",$instructors[$instructor_selected])
+       #$rangecontrol.DeployClone("xubuntu.20.04.2.base.f21","xubuntu-$num-$section_selected",$instructors[$instructor_selected])
+       #$rangecontrol.DeployClone("server2019.gui.f21","srv19-gui-$num-$section_selected",$instructors[$instructor_selected])
         
     }
     

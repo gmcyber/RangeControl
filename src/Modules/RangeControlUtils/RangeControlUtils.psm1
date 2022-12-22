@@ -125,10 +125,10 @@ function createNetwork($destination_folder, [string] $name, [string] $esxi_host)
     {
         Write-Host "Port group:", $name, "exists" -ForeGroundColor Yellow
         #GMCYBER DEBUGGGING
-        Write-Host "Ran into an issue creating a port group: $($PSItem.ToString())"
+        #Write-Host "Ran into an issue creating a port group: $($PSItem.ToString())"
         
     }
-    Start-Sleep -Second 1
+    #Start-Sleep -Second 1
     #grab the folder destination by view
     $dest = get-view -Id $destination_folder.Id
     #grab the newly created Network Object by view
@@ -137,6 +137,8 @@ function createNetwork($destination_folder, [string] $name, [string] $esxi_host)
     #this code is error prone and a work around due to -Location not being supported on Switches
     try {
         $task = $dest.MoveIntoFolder_Task($src.MoRef)
+        ##GMCYBER, SEE IF THIS MAKES IT MORE RELIABLE
+        Wait-Task -Task $task
     }
     catch 
     {
@@ -160,9 +162,10 @@ function addPermissionToFolder($folder, [string] $principalName, [string] $domai
     else 
     {
         $message = "{0} is neither a user or a group" -f $principalName
+        Write-Output $_
         throw $message    
     }
-    $perm = New-VIPermission -Role $role -Principal $acct.Name -Entity $folder -Propagate:$true
+    New-VIPermission -Role $role -Principal $acct.Name -Entity $folder -Propagate:$true
     $message = "{0} given {1} access to {2}" -f $acct.Name, $role, $folder.Name
     Write-Host $message -ForegroundColor Green
 }
@@ -200,11 +203,10 @@ function initializeCourse([string] $configuration_file)
     connect_vcenter($conf.vcenter_server)
     #BUILD COURSE VM HIERARCHY IF IT IS NOT THERE
     $courses_base_folder = GetExistingOrCreateFolder -FolderName $conf.courses_folder -folderType $VM_TYPE
-    $semester_base_folder = GetExistingOrCreateFolder -FolderName $conf.semester -ParentFolder $courses_base_folder -folderType $VM_TYPE
-    $section_base_folder = GetExistingOrCreateFolder -FolderName $conf.course_name -ParentFolder $semester_base_folder -folderType $VM_TYPE
-    $course_vms_folder = GetExistingOrCreateFolder -FolderName $conf.course_vms_folder -ParentFolder $section_base_folder -folderType $VM_TYPE
-    $group_vms_folder = GetExistingOrCreateFolder -FolderName $conf.group_vms_folder -ParentFolder $section_base_folder -folderType $VM_TYPE
-    $student_vms_folder = GetExistingOrCreateFolder -FolderName $conf.student_vms_folder -ParentFolder $section_base_folder -folderType $VM_TYPE
+    $course_base_folder = GetExistingOrCreateFolder -FolderName $conf.course_name -ParentFolder $courses_base_folder -folderType $VM_TYPE
+    $course_vms_folder = GetExistingOrCreateFolder -FolderName $conf.course_vms_folder -ParentFolder $course_base_folder -folderType $VM_TYPE
+    $group_vms_folder = GetExistingOrCreateFolder -FolderName $conf.group_vms_folder -ParentFolder $course_base_folder -folderType $VM_TYPE
+    $student_vms_folder = GetExistingOrCreateFolder -FolderName $conf.student_vms_folder -ParentFolder $course_base_folder -folderType $VM_TYPE
 
     #GRANT PRIVILEGES
     #Instructors should have cncs-instructor privileges at the $SECTION_FOLDER level
