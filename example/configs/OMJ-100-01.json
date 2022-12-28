@@ -9,7 +9,7 @@
     "group_networks_folder": "GROUP-NETWORKS",
     "student_role": "range-student",
     "esxi_host": "esxi2.range.local",
-    "data_store_name": "NFS-STUDENT",
+    "data_store_name": "RANGE",
     "base_vms":"BASE-VMS",
     "student_vms_folder":"STUDENT-VMS",
     "course_vms_folder": "COURSE-VMS",

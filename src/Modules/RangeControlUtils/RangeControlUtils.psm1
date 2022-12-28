@@ -136,13 +136,13 @@ function createNetwork($destination_folder, [string] $name, [string] $esxi_host)
     #move via move task on destination
     #this code is error prone and a work around due to -Location not being supported on Switches
     try {
-        $task = $dest.MoveIntoFolder_Task($src.MoRef)
+        $dest.MoveIntoFolder_Task($src.MoRef)
         ##GMCYBER, SEE IF THIS MAKES IT MORE RELIABLE
-        Wait-Task -Task $task
+        Start-Sleep -Seconds 1
     }
     catch 
     {
-        Write-Host "Error moving ", $name, " to: ", $destination_folder.Name, ", do so manually" -ForegroundColor Red
+        Write-Host "Error moving ", $name, " to: ", $destination_folder.Name, ", do so manually" , $($PSItem.ToString()) -ForegroundColor Red
     }
     
 }
@@ -244,7 +244,7 @@ function CopyFileToVM([string] $vmName, [string] $source, [string] $destination,
     }
 }
 
-function destroy_course([string] $section, [string] $vcenter_server)
+function DestroyCourse([string] $section, [string] $vcenter_server)
 #Note this is an exceptionally dangerous function and should only be run over break
 {
     #Connect
@@ -264,7 +264,7 @@ function destroy_course([string] $section, [string] $vcenter_server)
         {
             Write-Host $vm.name
         }
-        $confirmation = Read-Host "Danger:  Are you sure you want to proceed with VM Deletion? (y/n)?"
+        $confirmation = Read-Host "Danger:  Are you sure you want to proceed with VM Deletion? (y/n)?" -ForeGroundColor "Red"
         if ($confirmation -eq 'y')
         {    
             foreach($vm in $vms){
@@ -273,7 +273,7 @@ function destroy_course([string] $section, [string] $vcenter_server)
                     Write-Host "Powering Down:" $vm.name
                     Stop-VM -VM $vm -Confirm:$False
                 }
-                Write-Host "Deleting VM: " $vm.Name
+                Write-Host "Deleting VM: " $vm.Name -ForegroundColor "Red"
                 Remove-VM -VM  $vm -DeletePermanently -Confirm: $False
 
             }
@@ -290,7 +290,7 @@ function destroy_course([string] $section, [string] $vcenter_server)
     {
         Write-Host $switch.name
     }
-    $confirmation = Read-Host "Danger:  Are you sure you want to delete these switches? (y/n)?"
+    $confirmation = Read-Host "Danger:  Are you sure you want to delete these course and student switches? (y/n)?" -ForeGroundColor "Red"
     if ($confirmation -eq 'y')
     {    
         foreach($switch in $switches){
@@ -298,7 +298,7 @@ function destroy_course([string] $section, [string] $vcenter_server)
             Remove-VirtualSwitch -VirtualSwitch $switch -Confirm:$false
         }
     }
-    $confirmation = Read-Host "Danger:  Are you sure you want to proceed with Folder Deletion? (y/n)?"
+    $confirmation = Read-Host "Danger:  Are you sure you want to proceed with Network and VM Folder Deletion? (y/n)?" --ForeGroundColor "Red"
     if ($confirmation -eq 'y')
     {
         Write-Host "Deleting Course Folders"

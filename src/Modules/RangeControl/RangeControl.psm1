@@ -1,3 +1,4 @@
+# 11/7/2022 Renamed from OpenRange to RangeControl
 Import-Module RangeControlUtils
 class RangeControl
 {

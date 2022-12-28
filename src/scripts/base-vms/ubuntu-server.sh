@@ -1,7 +1,7 @@
 #!/bin/sh
 #script to prepare ubuntu desktop vm for cloning
 apt-get update
-apt-get upgrade
+apt-get upgrade -y
 
 #open ssh
 apt-get install -y open-vm-tools openssh-server
