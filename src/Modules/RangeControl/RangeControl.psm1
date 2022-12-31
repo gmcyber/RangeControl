@@ -67,6 +67,7 @@ class RangeControl
             throw "error condition, user is not a user or group"
         }
         $userFolder = GetExistingOrCreateFolder -FolderName $user -ParentFolder $folder -folderType "vm"
+        #TODO, when we give a professor spares, the instructor permissions get overwritten with the student role.
         addPermissionToFolder -folder $userFolder -principalName $user -domain $this.conf.domain -role $this.conf.student_role
 
         #get the source virtual machine

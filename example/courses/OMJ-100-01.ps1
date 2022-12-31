@@ -44,6 +44,8 @@ ubuntu.22.04.1.base
 
 #>
 
+# Remember to create your Course Gateway or the VMs deployed will not be able to get to the internet.
+
 $deploy_vms = Read-Host "Do you want to deploy the VMs (y/n)"
 if($deploy_vms -eq 'y')
 {
