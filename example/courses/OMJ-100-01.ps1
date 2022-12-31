@@ -52,7 +52,7 @@ if($deploy_vms -eq 'y')
     #This is similar to the week 1 deploy for Systems Administration I
     $rangecontrol.DeployClones("rocky.9.1.base","web01")
     $rangecontrol.DeployClones("pf.2.6.0.base","fw1")
-    $rangecontrol.DeployClones("vyos.f22","fw-mgmt")
+    $rangecontrol.DeployClones("ubuntu.22.04.1.base","web01")
     $rangecontrol.DeployClones("server.2019.base.v2","dc1")
-    $rangecontrol.DeployClones("windows10.ltsc.base","wsk1")
+    $rangecontrol.DeployClones("windows10.ltsc.base","wks1")
 }
