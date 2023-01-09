@@ -1,0 +1,22 @@
+{
+    "domain": "range",
+    "ad_vsphere_group": "vsphere-users",
+    "vcenter_server": "vcenter.range.local",
+    "courses_folder": "COURSES-S23",
+    "course_name": "OMJ-100-01",
+    "course_networks_folder": "COURSE-NETWORKS",
+    "student_networks_folder": "STUDENT-NETWORKS",
+    "group_networks_folder": "GROUP-NETWORKS",
+    "student_role": "range-student",
+    "esxi_host": "esxi1.range.local",
+    "data_store_name": "RANGE",
+    "base_vms":"BASE-VMS",
+    "student_vms_folder":"STUDENT-VMS",
+    "course_vms_folder": "COURSE-VMS",
+    "group_vms_folder" : "GROUP-VMS",
+    "default_network":"ETHHACK-WAN",
+    "networks":,
+    "instructors":["minerva.mcgonagall"],
+    "instructor_role" : "range-instructor",
+    "snapshots": "1"
+}
