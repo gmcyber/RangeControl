@@ -1,0 +1,97 @@
+# This playbook provisions the cupcake server with shellshock vulnerable cgi script
+#ansible-playbook -i cupcake-inventory.yml --ask-pass cupcake-playbook.yml --ask-vault-password
+# Set the hostname
+- name: cupcake
+  hosts: all
+  become: yes
+  tasks:
+    - name: include credentials
+      include_vars: ../ethhack.vars.enc
+    - name: set the root password
+      user:
+        name: root
+        password: "{{ cupcake.root_password | password_hash('sha512') }}"
+
+    - name: create unprivileged user
+      user:
+        name: "{{cupcake.user_name}}"
+        password: "{{cupcake.user_password | password_hash('sha512') }}"
+        state: present
+        create_home: yes
+
+  #note hostname setting in cent6 has to be done old school
+    - name: set /etc/sysconfig/network
+      shell: "sed -i 's/HOSTNAME=.*/HOSTNAME={{hostname}}/g' /etc/sysconfig/network"
+
+    - name: set /etc/hosts
+      lineinfile:
+        dest: /etc/hosts
+        line: "127.0.0.1 {{hostname}}"
+    - name: selinux permissive
+      shell: setenforce 0
+      ignore_errors: yes
+
+    - name: selinux disable on reboot
+      shell: "sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config"
+
+
+    - name: drop the root flag
+      copy:
+        dest: "/root/root-flag.txt"
+        content: |
+          "{{cupcake.root_flag}}"
+        owner: root
+        group: root
+
+    - name: drop the user flag
+      copy:
+        dest: "/home/{{cupcake.user_name}}/user-flag.txt"
+        content: |
+          "{{cupcake.user_flag}}"
+        owner: "{{cupcake.user_name}}"
+        group: "{{cupcake.user_name}}"
+
+    - name: remove welcome page
+      file:
+        path: "/etc/httpd/conf.d/welcome.conf"
+        state: absent
+
+    - name: upload index
+      copy:
+        src: "files/index.html"
+        dest: "/var/www/html/index.html"
+        owner: root
+        group: root
+        mode: 644
+
+    - name: upload cgi
+      copy:
+        src: "files/status"
+        dest: "/var/www/cgi-bin/status"
+        owner: root
+        group: root
+        mode: 751
+
+    - name: Start service httpd, if not running
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+    - name: upload iptables
+      copy:
+        src: "files/iptables"
+        dest: "/etc/sysconfig/iptables"
+        owner: root
+        group: root
+        mode: 600
+    - name: reload iptables
+      service:
+        name: iptables
+        state: reloaded
+    - name: Reboot the server
+      tags: reboot
+      become: yes
+      become_user: root
+      shell: "sleep 5 & reboot"
+      async: 1
+      poll: 0

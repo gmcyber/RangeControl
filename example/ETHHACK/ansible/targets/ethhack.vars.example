@@ -1,0 +1,6 @@
+cupcake:
+  user_name: samwise
+  user_flag: example-user-flag
+  root_flag: example-root-flag
+  user_password: examplepassword
+  root_password: examplerootpassword

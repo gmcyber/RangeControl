@@ -1,0 +1,9 @@
+#!/bin/bash
+echo "Content-type: text/html"
+echo ""
+echo "<html>"
+echo "<body>"
+echo "hostname:$(hostname)"
+echo "uptime:$(uptime)"
+echo "</body>"
+echo "</html>"

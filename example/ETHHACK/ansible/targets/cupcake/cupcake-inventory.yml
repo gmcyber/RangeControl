@@ -1,0 +1,7 @@
+linux_targets:
+  hosts:
+    10.0.17.27:
+      hostname: cupcake
+  vars:
+    ansible_user: root 
+    ansible_python_interpreter: /usr/local/bin/python3.6
