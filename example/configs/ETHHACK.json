@@ -3,7 +3,7 @@
     "ad_vsphere_group": "vsphere-users",
     "vcenter_server": "vcenter.range.local",
     "courses_folder": "COURSES-S23",
-    "course_name": "OMJ-100-01",
+    "course_name": "ETHHACK",
     "course_networks_folder": "COURSE-NETWORKS",
     "student_networks_folder": "STUDENT-NETWORKS",
     "group_networks_folder": "GROUP-NETWORKS",
