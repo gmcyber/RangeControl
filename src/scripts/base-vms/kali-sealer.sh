@@ -32,6 +32,8 @@ systemctl stop apt-daily.timer
 systemctl disable apt-daily.timer
 sudo apt autoremove -y
 #truncate the machine id to avoid duplicate dhcp
-echo > /etc/machine-id
+#OM Fixex
+rm /var/lib/dbus/machine-id
+ln -s /etc/machine-id /var/lib/dbus/machine-id
 
 echo "remove git repo and then issue a shutdown - h now"
